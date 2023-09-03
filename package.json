@@ -1,0 +1,31 @@
+{
+  "name": "eaf-procurements",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "eslint app",
+    "lint:fix": "eslint app --fix",
+    "start": "node ./bin/www"
+  },
+  "author": "Jeevan Prakash Pant <jp@edtyro.com>",
+  "contributors": [],
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.9.11",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
