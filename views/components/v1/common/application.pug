@@ -1,0 +1,40 @@
+//- @file application
+
+	@description Application mixin to generate application icon
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+
+//- @mixin application
+
+	@param {Object} app application
+	@param {String} app.namename of application (e.g. News)
+	@param {String} app.iconSrc source of image of application (e.g 'img/apps/app.png')
+	@param {String} app.decorator decorator of application (e.g. 'blue')
+	@param {String} app.permission permission of application (e.g. 'queries:index')
+
+mixin application(app)
+
+	- var permission = hasPermission[app.permission]
+
+	if permission || app.permission == "none"
+		.col-6.col-sm-4.col-md-3.col-lg-2.icon-wrapper
+			a.icon(href=app.href)
+				img.hr(alt=app.name, src=app.iconSrc)
+				if app.decorator == 'none'
+					div
+				else if app.decorator == 'green'
+					div.decorator.decorator-green
+				else if app.decorator == 'yellow'
+					div.decorator.decorator-yellow
+				else if app.decorator == 'blue'
+					div.decorator.decorator-blue
+				else if app.decorator == 'red'
+					div.decorator.decorator-red
+				else if app.decorator == 'black'
+					div.decorator.decorator-black
+				else
+					div.decorator.decorator-gray
+				p= app.name

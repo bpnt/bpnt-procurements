@@ -1,0 +1,50 @@
+//- @file Default Layout
+
+	@description Default layout for Edtyro Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+//- Imports and Declarations
+
+- var static = true
+
+- var mainUrl = '/'
+- var baseUrl = '/'
+- var mediaUrl ='/'
+
+
+//- following line should be commented during app integration
+
+//- include ../_/permissions
+//- - var title = 'Edtyro Application Design'
+
+
+//- following line should be uncommented during app integration
+
+include ../app/v1/status-message
+include ../app/v1/pagination
+include ../app/v1/format-date
+
+doctype html
+
+include  ../components/v1/headbar/headbar
+
+html(lang='en')
+
+	head
+		base(href=base)
+		
+		title=title
+
+		include ../partials/head
+
+		block styles
+
+	body
+		main
+			block content
+
+		include ../partials/scripts
+		block scripts

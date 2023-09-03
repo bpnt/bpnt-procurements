@@ -1,0 +1,89 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../layouts/default
+
+include ../components/v1/form/form
+
+//- imports
+
+include ../components/v1/common/application
+
+block styles
+
+block content
+	//- +headbar({
+			type : 'basic',
+			containerClass : 'container',
+			app : {
+				name : 'News',
+				src : baseUrl+'img/fav.png'
+			},
+			buttons : [{
+				background:'bg-btn-et-yellow',
+				href:'/news/categories',
+				title: 'News Categories',
+				icon: 'fas fa-list-alt',
+				permission: 'none'
+			},{
+				background:'bg-btn-et-green',
+				href:'/add',
+				title: 'Add News',
+				icon: 'fas fa-plus',
+				permission: 'none'
+			}]
+		})
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'App',
+			src : baseUrl+'img/procurement.png'
+		},
+		buttons : [{
+			background:'bg-btn-et-black',
+			href:'/',
+			title: 'Settings',
+			icon: 'fas fa-cog',
+			permission: 'none'
+		}]
+	})
+
+	.container
+		.functions
+			.row
+
+				+application({
+					name : 'Procurement Contract Processes',
+					iconSrc : baseUrl+'img/modules/blogs.png',
+					href : '/blogs',
+					decorator : 'red'
+				})
+
+				+application({
+					name : 'Procurement Item',
+					iconSrc : baseUrl+'img/modules/procurementItem.png',
+					href : '/procurementItems',
+					decorator : 'green'
+				})
+
+				+application({
+					name : 'Procurement Process',
+					iconSrc : baseUrl+'img/modules/procurementProcess.png',
+					href : '/procurementProcesses',
+					decorator : 'blue'
+				})
+
+				+application({
+					name : 'Supplier',
+					iconSrc : baseUrl+'img/modules/supplier.png',
+					href : '/suppliers',
+					decorator : 'blue'
+				})
+
+block scripts

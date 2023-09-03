@@ -1,0 +1,71 @@
+form#basic-details-add(method="post", action="")
+	input(name='_csrf', type='hidden', value=csrfToken)
+	.form-row.form-headbar
+		.col-half.status-message
+		.col-half
+			.form-buttons
+				ul
+					li.bg-btn-et-green
+						a(title='Save', onclick='document.getElementById("basic-details-add").submit();')
+							i.et.et_save
+	.form-row
+		h4 Conditionals
+		.col-half
+			.input-group
+				input#terms(type='checkbox' name='publish' checked)
+				label(for='terms')
+					| Publish
+		.col-half
+			.input-group
+				input#publishApi(type='checkbox' name='publishApi' checked)
+				label(for='publishApi')
+					| Publish API
+	.divider
+	.form-row
+		h4 Name
+		+inputText({
+			name: 'name',
+			placeholder: 'name',
+			icon: 'et et_id'
+		})
+	.form-row
+		.col-half
+			h4 Email
+			+inputText({
+				name: 'email',
+				placeholder: 'Email',
+				icon: 'et et_message'
+			})
+		.col-half
+			h4 Phone Number
+			+inputText({
+				name: 'phoneNo',
+				placeholder: 'Phone Number',
+				icon: 'et et_phone'
+			})
+	.divider
+	h3 (Optional Fields)
+	br
+	.form-row
+		.col-half
+			h4 State
+			+inputText({
+				name: 'state',
+				placeholder: 'State',
+				icon: 'et et_map'
+			})
+		.col-half
+			h4 Pin Code
+			+inputText({
+				name: 'pincode',
+				placeholder: 'Pin Code',
+				icon: 'et et_number'
+			})
+	.form-row
+		.col-half
+			h4 Approved By
+			+inputText({
+				name: 'approvedBy',
+				placeholder: 'Approved By',
+				icon: 'et et_person'
+			})

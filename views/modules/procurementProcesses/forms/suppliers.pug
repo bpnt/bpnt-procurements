@@ -1,0 +1,45 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="suppliers")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+				a(title='Add Specifications', onclick="addEntry({structure: '#supplier', structures: '#suppliers'})")
+					i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("suppliers-form").submit();')
+					i.et.et_save
+
+if suppliers && suppliers.length > 0
+	h3 Suppliers
+	br
+	//- pre set supplier (can be removed by cross)
+	if item.supplierId && item.supplierId.length > 0 && item.supplierId[0] != null
+		each icp in item.supplierId
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						input(type="hidden" name="supplierId" value=icp._id)
+						p= icp.name
+		//- if no supplier exists from beginning
+	else
+		.form-row
+			.col-half
+				select(name='supplierId')
+					each supplier in suppliers
+						if item.supplierId[0] == supplier.id
+							option(value=supplier.id selected) #{supplier.name}
+						else
+							option(value=supplier.id) #{supplier.name}
+else
+	h4 Concerned Supplier Not Available
+	p Use Supplier Module to add
+	br
+	if hasPermission["suppliers:purge"]
+		a(href= mainUrl + "suppliers/add") Click here
+	else
+		p NOTE: You don't have access to required module contact System Admin
+

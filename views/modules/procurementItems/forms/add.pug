@@ -1,0 +1,63 @@
+form#basic-details-add(method="post", action="", enctype="multipart/form-data")
+	input(name='_csrf', type='hidden', value=csrfToken)
+	.form-row.form-headbar
+		.col-half.status-message
+		.col-half
+			.form-buttons
+				ul
+					li.bg-btn-et-green
+						a(title='Save', onclick='document.getElementById("basic-details-add").submit();')
+							i.et.et_save
+	.form-row
+		h4 Conditionals
+		.col-half
+			.input-group
+				input#terms(type='checkbox' name='publish' checked)
+				label(for='terms')
+					| Publish
+		.col-half
+			.input-group
+				input#publishApi(type='checkbox' name='publishApi' checked)
+				label(for='publishApi')
+					| Publish API
+	br
+	.form-row
+		h4 Name Of Person
+		+inputText({
+			name: 'name',
+			placeholder: 'name',
+			icon: 'et et_id'
+		})
+	.form-row
+		h4 Item Name
+		+inputText({
+			name: 'item',
+			placeholder: 'item',
+			icon: 'et et_categories'
+		})
+
+	.form-row
+		h4 Image
+		.input-group.input-group-icon
+			input#upload-input(type='file', name='image', accept='image/*')
+			.input-icon
+				i(class="et et_file")
+	.form-row
+		.col-half
+			h4 Cost
+			+inputText({
+				name: 'cost',
+				placeholder: 'Cost',
+				icon: 'et et_money'
+			})
+		.col-half
+			h4 Quantity
+			+inputText({
+				name: 'quantity',
+				placeholder: 'Quantity',
+				icon: 'et et_number'
+			})
+	.divider
+	.form-row
+		h4 Item Description
+		textarea#description(name="description" style="min-height: 350px") !{'Place Your Content Here'}

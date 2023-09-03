@@ -1,0 +1,90 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../../layouts/default
+
+include ../../components/v1/form/form
+
+//- imports
+
+include ../../components/v1/common/application
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/status-message.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/forms.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/tabs.min.css')
+	link(rel='stylesheet', href=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.css')
+
+block content
+
+	- linkUrl = mainUrl + 'suppliers'
+
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Edit Supplier',
+			src : mediaUrl + 'img/modules/suppliers.png'
+		},
+		buttons : [
+		{
+			background:'bg-btn-et-black',
+			href: linkUrl,
+			title: 'Back',
+			icon: 'et et_back',
+			permission: "none"
+		}]
+	})
+
+	.container
+		.row
+			.col-md-12
+				.status-message-top
+					//- production
+					+status-message()
+
+	.container
+		.tabs
+			#tabs.et-tabs
+				ul.et-tabs-tab-group(role='tablist')
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#basic-details+')
+							i.et.et_details
+							|	Basic Details
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#advance-details+')
+							i.et.et_details
+							|	Advance Details
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#cps+')
+							i.et.et_details
+							|	Concerned Products
+				.et-tabs-panel-group
+					#basic-details.et-tabs-panel(role='tabpanel')
+						include ./forms/basic-details
+					#advance-details.et-tabs-panel(role='tabpanel')
+						include ./forms/advance-details
+					#IDs.et-tabs-panel(role='tabpanel')
+						include ./forms/cps
+
+
+block scripts
+	script(type='text/javascript', src=baseUrl+'js/tabs.min.js')
+	script.
+		$("#tabs").tabs({
+			equalHeights: true,
+			animation: "fade-scale",
+			autoplay: false,
+			responsive: {
+				breakpoint: 800,
+				headingTagName: "h4"
+			}
+		});
+	script(type='text/javascript', src=baseUrl+'js/form-replicate-form.min.js')
+	script(type='text/javascript', src=baseUrl+'js/form-add-entry.min.js')
+	script(type='text/javascript', src=baseUrl+'js/form-remove-replicate-form.min.js')

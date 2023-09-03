@@ -1,0 +1,36 @@
+//- @file functionButtons Mixin
+	@description functionButtons Mixin
+	@author Jeevan Prakash Pant <jp@edtyro.com> INITIAL WORK
+	@version 1.0.0
+	@copyright Edtyro Private Limited
+	@since 2020/04/05
+
+//- @mixin functionButtons
+
+	@param [{Object}] buttons
+	@param {String} button.background Background color of button (e.g. 'bg-btn-et-yellow')
+	@param {String} button.href Href link (e.g. '/application')
+	@param {String} button.title Button title (e.g. 'Categories')
+	@param {String} button.icon Button icon (e.g. 'fas fa-list-alt')
+	@param {String} button.permission Permission required for button (e.g. 'none')
+
+mixin functionButtons(buttons)
+	.function-buttons
+		ul
+			each button in buttons
+
+				- var permission = hasPermission[button.permission]
+
+				if permission || button.permission == "none"
+					if button.type && button.type=='button'
+						li(class=button.background)
+							if button.action
+								a(class=button.class, id=button.id, onclick=button.action, title=button.title)
+									i(class=button.icon)
+							else
+								a(class=button.class, id=button.id, title=button.title)
+									i(class=button.icon)
+					else
+						li(class=button.background)
+							a(class=button.class, href=button.href, title=button.title)
+								i(class=button.icon)

@@ -1,0 +1,19 @@
+//- @file headbarHeading Mixin
+	@description headbarHeading Mixin
+	@author Jeevan Prakash Pant <jp@edtyro.com> INITIAL WORK
+	@version 1.0.0
+	@copyright Edtyro Private Limited
+	@since 2020/04/05
+
+
+//- @mixin headbarHeading
+
+	@param {Object} app
+	@param {String} app.name Name of Application (e.g. 'News')
+	@param {String} app.src Source of Application Icon (e.g. '/img/fav.png')
+
+mixin headbarHeading(app)
+
+	.headbar-heading
+		img(src=app.src)
+		h1.kg-blue= app.name

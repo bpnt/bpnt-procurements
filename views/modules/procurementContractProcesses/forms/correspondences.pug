@@ -1,0 +1,119 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="correspondences")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Correspondences', onclick="addEntry({structure: '#specify', structures: '#correspondences'});addDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("correspondences-form").submit();')
+					i.et.et_save
+
+.divider
+
+if item.correspondences
+	if item.correspondences.length > 0
+		each specify in item.correspondences
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Request
+						+inputText({
+							name: 'request',
+							placeholder: 'Request',
+							icon: 'et et_follow-up',
+							value: specify.request
+						})
+					.col-half
+						h4 Renewal
+						+inputText({
+							name: 'renewal',
+							placeholder: 'Renewal',
+							icon: 'et et_refresh',
+							value: specify.renewal
+						})
+				.form-row
+					.col-half
+						h4 ApprovedBy
+						+inputText({
+							name: 'approvedBy',
+							placeholder: 'Approved By',
+							icon: 'et et_person',
+							value: specify.approvedBy
+						})
+					.col-half
+						h4 Date
+						+inputDatePicker({
+							type: 'text',
+							name: 'date',
+							class: 'preDate',
+							value: formatDate(specify.date)
+						})
+
+	else
+		.form-row
+			.col-half
+				h4 Request
+				+inputText({
+					name: 'request',
+					placeholder: 'Request',
+					icon: 'et et_follow-up',
+				})
+			.col-half
+				h4 Renewal
+				+inputText({
+					name: 'renewal',
+					placeholder: 'Renewal',
+					icon: 'et et_refresh',
+				})
+		.form-row
+			.col-half
+				h4 ApprovedBy
+				+inputText({
+					name: 'approvedBy',
+					placeholder: 'Approved By',
+					icon: 'et et_person',
+				})
+			.col-half
+				h4 Date
+				+inputDatePicker({
+					type: 'text',
+					name: 'date',
+					class: 'preDate'
+				})
+
+else
+	.form-row
+		.col-half
+			h4 Request
+			+inputText({
+				name: 'request',
+				placeholder: 'Request',
+				icon: 'et et_follow-up',
+			})
+		.col-half
+			h4 Renewal
+			+inputText({
+				name: 'renewal',
+				placeholder: 'Renewal',
+				icon: 'et et_refresh',
+			})
+	.form-row
+		.col-half
+			h4 ApprovedBy
+			+inputText({
+				name: 'approvedBy',
+				placeholder: 'Approved By',
+				icon: 'et et_person',
+			})
+		.col-half
+			h4 Date
+			+inputDatePicker({
+				type: 'text',
+				name: 'date',
+				class: 'preDate'
+			})

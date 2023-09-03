@@ -1,0 +1,48 @@
+//- @file statusMessage
+
+	@description status message to be used as view for test
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+
+//- @mixin statusMessage
+
+	@param {Object} p application
+	@param {String} p.color message color (e.g. red)
+	@param {String} p.message message of application (e.g. News)
+
+mixin statusMessage(p)
+
+	if p.color == "green"
+
+		div.status-message-wrapper.bg-btn-et-green
+			p=p.message
+			span
+				a.status-close(href='#')
+					i.fas.fa-times
+	
+	else if p.color == "red"
+
+		div.status-message-wrapper.bg-btn-et-red
+			p=p.message
+			span
+				a.status-close(href='#')
+					i.fas.fa-times
+
+	else if p.color == "yellow"
+
+		div.status-message-wrapper.bg-btn-et-yellow
+			p=p.message
+			span
+				a.status-close(href='#')
+					i.fas.fa-times
+
+	else
+
+		div.status-message-wrapper.bg-btn-et-black
+			p=p.message
+			span
+				a.status-close(href='#')
+					i.fas.fa-times

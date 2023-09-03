@@ -1,0 +1,43 @@
+- const messages = getMessages()
+
+mixin status-message()
+
+	if messages.success
+		each msg in messages.success
+			div.status-message-wrapper.bg-btn-et-green
+				p !{msg}
+				span
+					a.status-close
+						i.fas.fa-times
+
+	if messages.failure
+		each msg in messages.failure
+			div.status-message-wrapper.bg-btn-et-red
+				p !{msg}
+				span
+					a.status-close
+						i.fas.fa-times
+
+	if messages.warning
+		each msg in messages.warning
+			div.status-message-wrapper.bg-btn-et-yellow
+				p !{msg}
+				span
+					a.status-close
+						i.fas.fa-times
+	if messages.info
+		each msg in messages.info
+			div.status-message-wrapper.bg-btn-et-blue
+				p !{msg}
+				span
+					a.status-close
+						i.fas.fa-times
+
+	if messages.default
+		each msg in messages.default
+			div.status-message-wrapper.bg-btn-et-black
+				p !{msg}
+				span
+					a.status-close
+						i.fas.fa-times
+

@@ -1,0 +1,27 @@
+//- @file inputEmail
+
+	@description email input
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+
+//- @mixin inputEmail
+
+	@param {Object} p email input paramaters
+	@param {String} p.icon icon for email
+	@param {String} p.class class for email input
+	@param {String} p.name name for email input  
+	@param {String} p.id id for email input
+	@param {String} p.value value for email input
+
+mixin inputEmail(p)
+
+	- if(!p.icon){
+	-	p.icon = 'fas fa-envelope' };
+
+	.input-group.input-group-icon
+		input(type='email', class=p.class, name=p.name, placeholder=p.placeholder)
+		.input-icon
+			i(class=p.icon)

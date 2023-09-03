@@ -1,0 +1,39 @@
+tr
+	td
+		section(class="checkbox-wrapper")
+			.checkbox-custom
+				input(id=item.reference, type='checkbox', value='None', name='check')
+				label(for=item.reference)
+	td= item.reference
+	td
+		if item.publish && item.publishApi
+				span.et-table-status.bg-et-green Published
+		else if item.publish || item.publishApi
+			span.et-table-status.bg-et-yellow Partially Published
+		else
+			span.et-table-status.bg-et-red UnPublished
+	td
+		.et-table-options
+			ul
+				if hasPermission["procurementContractProcesses:view"]
+					li
+						a.et-table-option.bg-btn-et-green(href=linkUrl+'/view/' + item.reference, title='View')
+							i.et.et_eye
+				if hasPermission["procurementContractProcesses:edit"]
+					li
+						a.et-table-option.bg-btn-et-yellow(href=linkUrl+'/edit/' + item.reference,title='Edit')
+							i.et.et_edit
+
+				//- if deleted restore and purge will be visible
+				if item.drop === true
+					li
+						a.et-table-option.bg-btn-et-green(href=linkUrl+'/restore/' + item.reference, title='Restore')
+							i.et.et_restore
+					li
+						a.et-table-option.bg-btn-et-black(href=linkUrl+'/purge/' + item.reference, title='Delete')
+							i.et.et_delete
+				else
+					li
+						a.et-table-option.bg-btn-et-red(href=linkUrl+'/delete/' + item.reference, title='Delete')
+							i.et.et_delete
+	//- td(contenteditable='') High Priority

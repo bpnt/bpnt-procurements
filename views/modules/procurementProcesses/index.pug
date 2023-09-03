@@ -1,0 +1,340 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../../layouts/default
+
+include ../../components/v1/form/form
+
+//- imports
+
+include ../../components/v1/common/application
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/status-message.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/forms.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/modal.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/table.min.css')
+	link(rel='stylesheet', href=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.css')
+
+
+block content
+
+	- linkUrl = mainUrl + 'procurement-processes'
+
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Procurement Processes',
+			src : mediaUrl+'img/modules/procurementProcess.png'
+		},
+		buttons : [
+		{
+			background:'bg-btn-et-blue',
+			href:'#',
+			title: 'Analytics',
+			icon: 'et et_graph',
+			permission: "none"
+		},
+		{
+			background:'bg-btn-et-yellow',
+			href:'#',
+			title: 'Print',
+			icon: 'et et_print',
+			permission: "none"
+		},
+		{
+			type:'link',
+			background:'bg-btn-et-green',
+			href: linkUrl+'/add/',
+			title: 'Add Procurement Process',
+			icon: 'et et_add',
+			permission: 'procurementProcesses:add'
+		},
+		{
+			background:'bg-btn-et-black',
+			href: mainUrl,
+			title: 'Back',
+			icon: 'et et_back',
+			permission: "none"
+		}]
+	})
+
+	#modalSearchContainer.modal-container
+	#modalSearch.modal
+		.modal-header-custom
+			+headbar({
+				type : 'modal',
+				containerClass : 'container',
+				app : {
+					name : 'Search',
+					src : mediaUrl+'img/tools/search.png'
+				},
+				buttons : [
+					{
+						type:'button',
+						background:'bg-btn-et-green',
+						action:'document.getElementById("search-form").submit();',
+						title: 'Search',
+						icon: 'et et_search',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-green',
+						href:'#',
+						title: 'Add Filter',
+						icon: 'et et_add',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-skyBlue',
+						href:'#',
+						title: 'Remove Last Search',
+						icon: 'et et_minus',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-black',
+						href:linkUrl,
+						title: 'Back',
+						icon: 'et et_back',
+						permission: 'none'
+					}]
+				})
+		.modal-content
+			.container-fluid
+				.row
+					.col-md-12
+						form#search-form(method='get' action='')
+							.form-row
+								br
+								.col-full
+									.input-group
+										input(type='text', name='search', placeholder='Search Here...')
+	#modalFilterContainer.modal-container
+	#modalFilter.modal
+		.modal-header-custom
+			+headbar({
+				containerClass : 'container',
+				app : {
+					name : 'Filter',
+					src : mediaUrl+'img/tools/filter.png'
+				},
+				buttons : [
+					{
+						type:'link',
+						background:'bg-btn-et-green',
+						href:'#',
+						title: 'Save',
+						icon: 'et et_save',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-green',
+						href:'#',
+						title: 'Reset',
+						icon: 'et et_refresh',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-green',
+						href:'#',
+						title: 'Add Filter',
+						icon: 'et et_add',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-skyBlue',
+						href:'#',
+						title: 'Remove Filter',
+						icon: 'et et_minus',
+						permission: 'none'
+					},
+					{
+						type:'link',
+						background:'bg-btn-et-black',
+						href:linkUrl,
+						title: 'Back',
+						icon: 'et et_back',
+						permission: 'none'
+					}]
+				})
+		.modal-content
+			.container-fluid
+				.row
+					//- .col-md-12
+					//- 	form
+					//- 		.form-row
+					//- 			.col-half
+					//- 				select(name='filter')
+					//- 					option(value='post')  Post
+					//- 					option(value='count')  Count
+					//- 					option(value='type')  Type
+					//- 			.col-half
+					//- 				select(name='graph')
+					//- 					option(value='source')  Pie
+					//- 					option(value='today')  Bar
+
+					p(style="width:100%;text-align:center;margin-top:20px;") Will be available later
+	.container
+		.row
+			.col-md-12
+				.status-message-top
+					//- production
+					+status-message()
+
+	.container
+		.tablehead
+			.row
+				.col-md-4
+					.form-row
+						h4 Time Span
+						.col-full
+							select(id='timespan' name='timespan')
+								option(value='week')  This Week
+								option(value='today')  Today
+								option(value='month')  This Month
+								option(value='three')  Three Month
+								option(value='six')  Six Month
+								option(value='year')  This Year
+								option(value='yearthree')  Three Years
+								option(value='yearfive')  Five Year
+								option(value='all')  All Time
+				.col-md-4
+					.form-row
+						.col-full
+							h4 From
+							.input-group.input-group-icon
+								+inputDatePicker({
+									type: 'text',
+									id: 'start-date'
+								})
+				.col-md-4
+					.form-row
+						.col-full
+							h4 To
+							.input-group.input-group-icon
+								+inputDatePicker({
+									type: 'text',
+									id: 'end-date'
+								})
+			br
+			.row
+		.row
+			.col-md-4
+				.form-control
+					label(for='search')
+						i.et.et_search
+					input.table-filter(type='search', data-table='advanced-web-table', placeholder='Micro Search...')
+			.col-md-8
+				.tablehead-buttons
+					ul
+						li
+							a.et-btn-tablehead.bg-btn-et-blue(href='#', title='Search', id='openModalSearch' action='openModalSearch')
+								i.et.et_search
+						li
+							a.et-btn-tablehead.bg-btn-et-yellow(href='#', title='Filter', id='openModalFilter', action='openModalFilter')
+								i.et.et_filter
+						li
+							a#big.et-btn-tablehead.bg-btn-et-green(href='#', title='Increase Font Size')
+								i.et.et_font +
+						li
+							a#normal.et-btn-tablehead.bg-btn-et-blue(href='#', title='Normal Font Size')
+								i.et.et_font
+						li
+							a#small.et-btn-tablehead.bg-btn-et-yellow(href='#', title='Decrease Font Size')
+								i.et.et_font -
+						li
+							a.et-btn-tablehead.bg-btn-et-blue(href='', title='Unpublish Selected')
+								i.et.et_shield
+						li
+							a.et-btn-tablehead.bg-btn-et-red(href='', title='Delete Selected')
+								i.et.et_delete
+		//- Table  initiates
+		.et-table
+			.table-responsive
+				table#ordering-table.advanced-web-table
+					thead
+						tr
+							th
+								section(class="checkbox-wrapper")
+									.checkbox-custom
+										input#checkbox-input-all(type='checkbox', value='None', name='check')
+										label(for='checkbox-input-all')
+							th Name
+							th Status
+							th Options
+							//- th Quick Notes
+					tbody
+						each item in items
+							if hasPermission["ProcurementProcesses:purge"]
+								include ./table/purgeable
+							else
+								include ./table/deleteable
+		//- Table terminates
+
+		//- Pagination initiates
+		if searchUrl
+			+pagination({pageUrl: linkUrl, searchQuery: searchUrl})
+		else
+			+pagination({pageUrl: linkUrl})
+		//- Pagination terminates
+
+block scripts
+	script(type='text/javascript', src=baseUrl+'js/status-message.min.js')
+	script(type='text/javascript', src=baseUrl+'js/table.min.js')
+	script(type='text/javascript', src=baseUrl+'js/fontsize.min.js')
+	script(type='text/javascript', src=baseUrl+'js/timespan.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/moment/moment.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/php-date-formatter/js/php-date-formatter.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/jquery-mousewheel/jquery.mousewheel.js')
+	script(type='text/javascript', src=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.js')
+	script(type='text/javascript', src=baseUrl+'js/selectAll-checkBox.min.js')
+	script.
+		$("#openModalSearch").click(function(){
+			$("#modalSearchContainer").css("display","block");
+			$("#modalSearch").css("display","block");
+		});
+		$(".cancelModalSearch").click(function(){
+			$("#modalSearchContainer").fadeOut();
+			$("#modalSearch").fadeOut();
+		});
+		$("#openModalFilter").click(function(){
+			$("#modalFilterContainer").css("display","block");
+			$("#modalFilter").css("display","block");
+		});
+		$(".cancelModalFilter").click(function(){
+			$("#modalFilterContainer").fadeOut();
+			$("#modalFilter").fadeOut();
+		});
+	script.
+		$.datetimepicker.setLocale('en');
+		$('#start-date').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		$('#end-date').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+	script.
+		$(document).ready(function(){
+			var startDT = new Date();
+			var endDT = new Date();
+			startDT.setDate(startDT.getDate() - startDT.getDay())
+			startDT.setHours(0)
+			startDT.setMinutes(0)
+			var start = startDT.getFullYear() + "/" + ('0' + (startDT.getMonth() + 1)).slice(-2) + "/" + ('0' + startDT.getDate()).slice(-2) + " " + ('0' + startDT.getHours()).slice(-2) + ":" + ('0' + startDT.getMinutes()).slice(-2)
+			var end = endDT.getFullYear() + "/" + ('0' + (endDT.getMonth() + 1)).slice(-2) + "/" + ('0' + endDT.getDate()).slice(-2) + " " + ('0' + endDT.getHours()).slice(-2) + ":" + ('0' + endDT.getMinutes()).slice(-2)
+			$('#start-date').val(start).trigger('change');
+			$('#end-date').val(end).trigger('change');
+		});

@@ -1,0 +1,98 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="payments")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Payment Informations', onclick="addEntry({structure: '#payment', structures: '#payments'});addPaymentDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("payments-form").submit();')
+					i.et.et_save
+
+.divider
+
+if item.payments
+	if item.payments.length > 0
+		each payment in item.payments
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Approved By
+						+inputText({
+							name: 'approvedBy',
+							placeholder: 'Approved By',
+							icon: 'et et_person',
+							value: payment.approvedBy
+						})
+					.col-half
+						h4 Payment Date
+						+inputDatePicker({
+							type: 'text',
+							name: 'paymentdate',
+							class: 'prePaymentdate',
+							value: formatDate(payment.paymentdate)
+						})
+				.form-row
+					br
+					.col-half
+						h4 Assigned By
+						+inputText({
+							name: 'assignedBy',
+							placeholder: 'Assigned By',
+							icon: 'et et_person',
+							value: payment.assignedBy
+						})
+
+	else
+		.form-row
+			.col-half
+				h4 Approved By
+				+inputText({
+					name: 'approvedBy',
+					placeholder: 'Approved By',
+					icon: 'et et_person'
+				})
+			.col-half
+				h4 Payment Date
+				+inputDatePicker({
+					type: 'text',
+					name: 'paymentdate',
+					class: 'prePaymentdate'
+				})
+		.form-row
+			.col-half
+				h4 Assigned By
+				+inputText({
+					name: 'assignedBy',
+					placeholder: 'Assigned By',
+					icon: 'et et_person'
+				})
+
+else
+	.form-row
+		.col-half
+			h4 Approved By
+			+inputText({
+				name: 'approvedBy',
+				placeholder: 'Approved By',
+				icon: 'et et_person'
+			})
+		.col-half
+			h4 Payment Date
+			+inputDatePicker({
+				type: 'text',
+				name: 'paymentdate',
+				class: 'prePaymentdate'
+			})
+	.form-row
+		.col-half
+			h4 Assigned By
+			+inputText({
+				name: 'assignedBy',
+				placeholder: 'Assigned By',
+				icon: 'et et_person'
+			})

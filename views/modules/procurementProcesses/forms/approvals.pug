@@ -1,0 +1,96 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="approvals")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Approvals', onclick="addEntry({structure: '#approve', structures: '#approvals'});addApprovedDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("approvals-form").submit();')
+					i.et.et_save
+
+.divider
+
+if item.approvals
+	if item.approvals.length > 0
+		each approve in item.approvals
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Approved By
+						+inputText({
+							name: 'approvedBy',
+							placeholder: 'Approved By',
+							icon: 'et et_person',
+							value: approve.approvedBy
+						})
+					.col-half
+						h4 Approved At
+						+inputDatePicker({
+							type: 'text',
+							name: 'approvedAt',
+							class: 'preApprovedAt',
+							value: formatDate(approve.approvedAt)
+						})
+				.form-row
+					h4 Remarks
+					+inputText({
+						name: 'remarks',
+						placeholder: 'Remarks',
+						icon: 'et et_write',
+						value: approve.remarks
+					})
+
+	else
+		.form-row
+			.col-half
+				h4 Approved By
+				+inputText({
+					name: 'approvedBy',
+					placeholder: 'Approved By',
+					icon: 'et et_person'
+				})
+			.col-half
+				h4 Approved At
+				+inputDatePicker({
+					type: 'text',
+					name: 'approvedAt',
+					class: 'preApprovedAt'
+				})
+		.form-row
+			h4 Remarks
+			+inputText({
+				name: 'remarks',
+				placeholder: 'Remarks',
+				icon: 'et et_write'
+			})
+
+else
+	.form-row
+		.col-half
+			h4 Approved By
+			+inputText({
+				name: 'approvedBy',
+				placeholder: 'Approved By',
+				icon: 'et et_person'
+			})
+		.col-half
+			h4 Approved At
+			+inputDatePicker({
+				type: 'text',
+				name: 'approvedAt',
+				class: 'preApprovedAt'
+			})
+	.form-row
+		h4 Remarks
+		+inputText({
+			name: 'remarks',
+			placeholder: 'Remarks',
+			icon: 'et et_write'
+		})
+
+

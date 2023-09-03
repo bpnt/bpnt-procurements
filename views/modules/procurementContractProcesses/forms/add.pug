@@ -1,0 +1,51 @@
+input(name='_csrf', type='hidden', value=csrfToken)
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("basic-details-form").submit();')
+					i.et.et_save
+.form-row
+	h4 Conditionals
+	.col-half
+		.input-group
+			input#terms(type='checkbox' name='publish' checked)
+			label(for='terms')
+				| Publish
+	.col-half
+		.input-group
+			input#publishApi(type='checkbox' name='publishApi' checked)
+			label(for='publishApi')
+				| Publish API
+.divider
+.form-row.form-headbar
+	.col-half
+		h3 Contracts
+	.col-half
+		.form-buttons
+			ul
+				li.bg-btn-et-blue
+					a(title='Add Contract Informations', onclick="addEntry({structure: '#contract', structures: '#basic-details-form'});addDatePicker();")
+						i.et.et_add
+.form-row
+	.col-half
+		h4 Document File
+		.input-group.input-group-icon
+			input#upload-input(type='file', name='contracts', accept='application/pdf,image/*')
+			.input-icon
+				i(class="et et_briefcase")
+	.col-half
+		h4 Authorized By
+		+inputText({
+			name: 'authorizedBy',
+			placeholder: 'Authorized By',
+			icon: 'et et_person',
+		})
+.form-row
+	.col-half
+		h4 Authorized At
+			+inputDatePicker({
+				type: 'text',
+				name: 'authorizedAt',
+				id: 'authorizedAt'
+			})

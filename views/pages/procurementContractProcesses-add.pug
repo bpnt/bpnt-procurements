@@ -1,0 +1,131 @@
+//- @file app
+
+    @description Apps/Modules Design
+
+    @author Jeevan Prakash Pant <jp@edtyro.com>
+    @version 1.0.0
+    @copyright Edtyro Private Limited, 2020
+
+extends ../layouts/default
+
+include ../components/v1/form/form
+
+//- imports
+
+include ../components/v1/common/application
+
+block styles
+    link(rel='stylesheet', href=baseUrl+'css/status-message.min.css')
+    link(rel='stylesheet', href=baseUrl+'css/forms.min.css')
+    link(rel='stylesheet', href=baseUrl+'css/tabs.min.css')
+    link(rel='stylesheet', href=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.css')
+
+block content
+
+    - linkUrl = mainUrl+'procurementContractProcesses/'
+
+    +headbar({
+        type : 'basic',
+        containerClass : 'container',
+        app : {
+            name : 'Add procurementContractProcesses',
+            src : mediaUrl+'img/modules/procurementContractProcesses.png'
+        },
+        buttons : [
+        {
+            background:'bg-btn-et-black',
+            href: linkUrl,
+            title: 'Back',
+            icon: 'fas fa-chevron-circle-left',
+            permission: "none"
+        }]
+    })
+    .container
+        .tabs
+            #tabs.et-tabs
+                ul.et-tabs-tab-group(role='tablist')
+                    li.et-tabs-tab-item(role='presentation')
+                        a.et-tabs-tab(role='tab', href='#basic-details+')
+                            i.fas.fa-info
+                            |	Basic Details
+                .et-tabs-panel-group
+                    #basic-details.et-tabs-panel(role='tabpanel')
+                        form#basic-details-add(method="post", action="")
+                            .form-row.form-headbar
+                                .col-half.status-message
+                                .col-half
+                                    .form-buttons
+                                        ul
+                                            li.bg-btn-et-green
+                                                a(title='Save', onclick='document.getElementById("basic-details-add").submit();')
+                                                    i.fas.fa-save.fa-2x
+                            .form-row
+                                h4 Conditionals
+                                .col-half
+                                    .input-group
+                                        input#terms(type='checkbox' name='publish')
+                                        label(for='terms')
+                                            | Publish
+                                .col-half
+                                    .input-group
+                                        input#publishApi(type='checkbox' name='publishApi')
+                                        label(for='publishApi')
+                                            | Publish API
+                            .divider
+                            .form-row
+                                h4 Article Title
+                                +inputText({
+                                    name: 'articleTitle',
+                                    placeholder: 'Article Title',
+                                    icon: 'fas fa-user'
+                                })
+                            .form-row
+                                .col-half
+                                    h4 Category
+                                    select(name='category')
+                                        option(value='Someone')  Someone
+                            br
+                            .form-row
+                                .col-half
+                                    h4 Published By
+                                    +inputText({
+                                        name: 'postedBy',
+                                        placeholder: 'Phone Number',
+                                        icon: 'fas fa-user'
+                                    })
+                                .col-half
+                                    h4 Published On
+                                    .input-group
+                                        +inputDatePicker({
+                                            name: 'publishedAt',
+                                            id: 'publishedAt'
+                                        })
+                            .divider
+                            .form-row
+                                h4 Notes
+                                textarea#notes(name="note" style="min-height: 350px") !{'Place Your Content Here'}
+block scripts
+    script(type='text/javascript', src=baseUrl+'js/tabs.min.js')
+    script.
+        $("#tabs").tabs({
+            equalHeights: true,
+            animation: "fade-scale",
+            autoplay: false,
+            responsive: {
+                breakpoint: 800,
+                headingTagName: "h4"
+            }
+        });
+    script(type='text/javascript', src=baseUrl+'vendors/ckeditor/ckeditor.js')
+    script.
+        CKEDITOR.replace( 'notes' );
+    script(type='text/javascript', src=baseUrl+'js/timespan.min.js')
+    script(type='text/javascript', src=baseUrl+'vendors/moment/moment.min.js')
+    script(type='text/javascript', src=baseUrl+'vendors/php-date-formatter/js/php-date-formatter.min.js')
+    script(type='text/javascript', src=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.js')
+
+    script.
+        $.datetimepicker.setLocale('en');
+        $('#publishedAt').datetimepicker({
+            mask:'9999/19/39 29:59'
+        });

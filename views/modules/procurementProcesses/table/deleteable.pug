@@ -1,0 +1,32 @@
+if item.drop === false
+	tr
+		td
+			section(class="checkbox-wrapper")
+				.checkbox-custom
+					input(id=item.reference, type='checkbox', value='None', name='check')
+					label(for=item.reference)
+		td= item.name
+		td
+			if item.publish && item.publishApi
+					span.et-table-status.bg-et-green Published
+			else if item.publish || item.publishApi
+				span.et-table-status.bg-et-yellow Partially Published
+			else
+				span.et-table-status.bg-et-red UnPublished
+		td
+			.et-table-options
+				ul
+					if hasPermission["procurementProcesses:view"]
+						li
+							a.et-table-option.bg-btn-et-green(href=linkUrl+'/view/' + item.reference, title='View')
+								i.et.et_eye
+					if hasPermission["procurementProcesses:edit"]
+						li
+							a.et-table-option.bg-btn-et-yellow(href=linkUrl+'/edit/' + item.reference, title='Edit')
+								i.et.et_edit
+
+					if hasPermission["procurementProcesses:delete"]
+						li
+							a.et-table-option.bg-btn-et-red(href=linkUrl+'/delete/' + item.reference, title='Delete')
+								i.et.et_delete
+		//- td(contenteditable='') High Priority

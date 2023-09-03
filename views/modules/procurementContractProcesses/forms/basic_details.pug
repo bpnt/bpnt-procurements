@@ -1,0 +1,107 @@
+input(type='hidden', name='_csrf', value=csrfToken)
+input(type="hidden", name="_page", value="basic-details")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("basic-details-form").submit();')
+					i.et.et_save
+.form-row
+	h4 Conditionals
+	.col-half
+		.input-group
+			if item.publish
+				input#publish(type='checkbox' name='publish', checked)
+			else
+				input#publish(type='checkbox' name='publish')
+			label(for='publish')
+				| Publish
+	.col-half
+		.input-group
+			if item.publishApi
+				input#publishApi(type='checkbox' name='publishApi', checked)
+			else
+				input#publishApi(type='checkbox' name='publishApi')
+			label(for='publishApi')
+				| Publish API
+hr
+.form-row.form-headbar
+	.col-half
+		h3 Contracts
+	.col-half
+		.form-buttons
+			ul
+				li.bg-btn-et-blue
+					a(title='Add Contract Informations', onclick="addEntry({structure: '#contract', structures: '#basic-details'});addAuthhorizedDatePicker();")
+						i.et.et_add
+
+if item.contracts
+	if item.contracts.length > 0
+		each contract in item.contracts
+			.form-row
+				if contract.document
+					.col-half
+						a(href= '/uploads/procurementContractProcesses/' + item.reference + '/' + contract.document, target="__blank") View Document
+
+				.col-half
+					.input-group
+						input(id=contract.document type='checkbox' name='remove' value=contract.document)
+						label(for=contract.document)
+							| Remove Document
+			.form-row
+				.col-half
+					h4 Authorized By
+					p= contract.authorizedBy
+				.col-half
+					h4 Authorized On
+					p= formatDate(contract.authorizedAt)
+			br
+			br
+
+	else
+		.form-row
+			.col-half
+				h4 Document File
+				.input-group.input-group-icon
+					input#upload-input(type='file', name='contracts', accept='application/pdf,image/*')
+					.input-icon
+						i(class="et et_briefcase")
+		.form-row
+			.col-half
+				h4 Authorized By
+				+inputText({
+					name: 'authorizedBy',
+					placeholder: 'Authorized By',
+					icon: 'et et_person',
+				})
+			.col-half
+				h4 Authorized At
+					+inputDatePicker({
+						type: 'text',
+						name: 'authorizedAt',
+						class: 'preauthorizedAt'
+					})
+
+else
+	.form-row
+		.col-half
+			h4 Document File
+			.input-group.input-group-icon
+				input#upload-input(type='file', name='contracts', accept='application/pdf,image/*')
+				.input-icon
+					i(class="et et_briefcase")
+	.form-row
+		.col-half
+			h4 Authorized By
+			+inputText({
+				name: 'authorizedBy',
+				placeholder: 'Authorized By',
+				icon: 'et et_person',
+			})
+		.col-half
+			h4 Authorized At
+				+inputDatePicker({
+					type: 'text',
+					name: 'authorizedAt',
+					class: 'preauthorizedAt'
+				})

@@ -1,0 +1,99 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="authorizations")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Authorizer', onclick="addEntry({structure: '#assign', structures: '#authorizations'});addAuthorizationDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("authorizations-form").submit();')
+					i.et.et_save
+
+.divider
+
+if item.authorizations
+	if item.authorizations.length > 0
+		each authorize in item.authorizations
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Authorized By
+						+inputText({
+							name: 'authorizedBy',
+							placeholder: 'Authorized By',
+							icon: 'et et_person',
+							value: authorize.authorizedBy
+						})
+					.col-half
+						h4 Authorized At
+						+inputDatePicker({
+							type: 'text',
+							name: 'authorizedAt',
+							class: 'preAuthorizedAt',
+							value: formatDate(authorize.authorizedAt)
+						})
+				.form-row
+					.col-half
+						h4 Remarks
+						+inputText({
+							name: 'remarks',
+							placeholder: 'Remarks',
+							icon: 'et et_write',
+							value: authorize.remarks
+						})
+
+	else
+		.form-row
+			.col-half
+				h4 Authorized By
+				+inputText({
+					name: 'authorizedBy',
+					placeholder: 'Authorized By',
+					icon: 'et et_person'
+				})
+			.col-half
+				h4 Authorized At
+				+inputDatePicker({
+					type: 'text',
+					name: 'authorizedAt',
+					class: 'preAuthorizedAt'
+				})
+		.form-row
+			.col-half
+				h4 Remarks
+				+inputText({
+					name: 'remarks',
+					placeholder: 'Remarks',
+					icon: 'et et_write'
+				})
+
+else
+	.form-row
+		.col-half
+			h4 Authorized By
+			+inputText({
+				name: 'authorizedBy',
+				placeholder: 'Authorized By',
+				icon: 'et et_person'
+			})
+		.col-half
+			h4 Authorized At
+			+inputDatePicker({
+				type: 'text',
+				name: 'authorizedAt',
+				class: 'preAuthorizedAt'
+			})
+	.form-row
+		.col-half
+			h4 Remarks
+			+inputText({
+				name: 'remarks',
+				placeholder: 'Remarks',
+				icon: 'et et_write'
+			})
+
+

@@ -1,0 +1,26 @@
+//- @file inputDatePicker
+
+	@description datePicker Plugin Component
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+
+//- @mixin inputDatePicker
+
+	@param {Object} p datepicker paramaters
+	@param {String} p.icon icon for datepicker
+	@param {String} p.class class for datepicker input
+	@param {String} p.name name for datepicker input 
+	@param {String} p.id id for datepicker input
+	@param {String} p.value value for datepicker input
+
+mixin inputDatePicker(p)
+	//- params default
+	if !p.icon
+		- p.icon = "et et_calendar"
+	.input-group.input-group-icon
+		input(type='text', class=p.class name=p.name, id=p.id, value=p.value)
+		.input-icon
+			i(class=p.icon)

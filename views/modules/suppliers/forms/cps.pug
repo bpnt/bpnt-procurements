@@ -1,0 +1,62 @@
+form#cps-form(method="post", action="")
+	input(type='hidden', name='_csrf',  value=csrfToken)
+	input(type="hidden", name="_page", value="cps")
+	.form-row.form-headbar
+		.form-buttons
+			ul
+				li.bg-btn-et-blue
+					a(title='Add Specifications', onclick="addEntry({structure: '#concernedProduct', structures: '#concernedProducts'})")
+						i.et.et_add
+				li.bg-btn-et-green
+					a(title='Save', onclick='document.getElementById("cps-form").submit();')
+						i.et.et_save
+
+	if procurementItems && procurementItems.length > 0
+		h3 Concerned Products
+		br
+		//- pre set products (can be removed by cross)
+		if item.concernedProducts && item.concernedProducts.length > 0 && item.concernedProducts[0] != null
+			each icp in item.concernedProducts
+				.form-wrapper
+					span
+						a.segment-cross()
+							i.et.et_times
+					.form-row
+						.col-half
+							input(type="hidden" name="concernedProducts" value=icp._id)
+							p= icp.name
+			//- if no product exists from beginning
+		else
+			.form-row
+				.col-half
+					select(name='concernedProducts')
+						each product in procurementItems
+							if item.concernedProducts[0] == product.id
+								option(value=product.id selected) #{product.name}
+							else
+								option(value=product.id) #{product.name}
+	else
+		h4 Concerned Product Not Available
+		p Use Procurement Item Module to add
+		br
+		if hasPermission["procurementItems:purge"]
+			a(href= mainUrl + "procurement-items/add") Click here
+		else
+			p NOTE: You don't have access to required module contact System Admin
+
+	#concernedProducts
+
+//- Repetative Structure
+#concernedProduct(style="display:none")
+	.form-wrapper
+		span
+			a.segment-cross()
+				i.et.et_times
+		.form-row
+			.col-half
+				select(name='concernedProducts')
+					each product in procurementItems
+						if item.concernedProducts[0] == product.id
+							option(value=product.id selected) #{product.name}
+						else
+							option(value=product.id) #{product.name}

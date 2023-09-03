@@ -1,0 +1,78 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="specifications")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Specifications', onclick="addEntry({structure: '#specify', structures: '#specifications'});addDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("specifications-form").submit();')
+					i.et.et_save
+
+.form-row
+	.col-half
+		h3 Label / Specification Title
+	.col-half
+		h3 Specification Detail
+
+.divider
+
+if item.specifications
+	if item.specifications.length > 0
+		each specify in item.specifications
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Label
+						+inputText({
+							name: 'label',
+							placeholder: 'Label',
+							icon: 'et et_write',
+							value: specify.label
+						})
+					.col-half
+						h4 Specification Detail
+						+inputText({
+							name: 'specificationDetail',
+							placeholder: 'Specification Detail',
+							icon: 'et et_details',
+							value: specify.specificationDetail
+						})
+
+	else
+		.form-row
+			.col-half
+				h4 Label
+				+inputText({
+					name: 'label',
+					placeholder: 'Label',
+					icon: 'et et_write',
+				})
+			.col-half
+				h4 Specification Detail
+				+inputText({
+					name: 'specificationDetail',
+					placeholder: 'Specification Detail',
+					icon: 'et et_details',
+				})
+
+else
+	.form-row
+		.col-half
+			h4 Label
+			+inputText({
+				name: 'label',
+				placeholder: 'Label',
+				icon: 'et et_write',
+			})
+		.col-half
+			h4 Specification Detail
+			+inputText({
+				name: 'specificationDetail',
+				placeholder: 'Specification Detail',
+				icon: 'et et_details',
+			})

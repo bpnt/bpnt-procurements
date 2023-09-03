@@ -1,0 +1,100 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../layouts/default
+
+include ../components/v1/form/form
+
+//- imports
+
+include ../components/v1/common/application
+
+block styles
+
+block content
+
+	//- +headbar({
+			type : 'basic',
+			containerClass : 'container',
+			app : {
+				name : 'News',
+				src : baseUrl+'img/fav.png'
+			},
+			buttons : [{
+				background:'bg-btn-et-yellow',
+				href:'/news/categories',
+				title: 'News Categories',
+				icon: 'fas fa-list-alt',
+				permission: 'none'
+			},{
+				background:'bg-btn-et-green',
+				href:'/add',
+				title: 'Add News',
+				icon: 'fas fa-plus',
+				permission: 'none'
+			}]
+		})
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Procurements',
+			src : mediaUrl + 'img/app.png'
+		},
+		buttons : [{
+			background:'bg-btn-et-black',
+			href: mainUrl + 'settings',
+			title: 'Settings',
+			icon: 'et et_settings',
+			permission: 'app:settings'
+		}, {
+			background:'bg-btn-et-black',
+			href:'/',
+			title: 'Back',
+			icon: 'et et_back',
+			permission: 'none'
+		}]
+	})
+
+	.container
+		.functions
+			.row
+
+				+application({
+					name : 'Procurement Processes',
+					iconSrc : mediaUrl + 'img/modules/procurementProcess.png',
+					href : mainUrl + 'procurement-processes',
+					decorator : 'red',
+					permission : 'procurementProcesses:index'
+				})
+
+				+application({
+					name : 'Procurement Items',
+					iconSrc : mediaUrl +  'img/modules/procurementItems.png',
+					href : mainUrl + 'procurement-items',
+					decorator : 'yellow',
+					permission : 'procurementItems:index'
+				})
+
+				+application({
+					name : 'Procurement Contract Processes',
+					iconSrc : mediaUrl + 'img/modules/procurementContractProcess.png',
+					href : mainUrl + 'procurement-contract-processes',
+					decorator : 'yellow',
+					permission : 'procurementContractProcesses:index'
+				})
+
+				+application({
+					name : 'Suppliers',
+					iconSrc : mediaUrl + 'img/modules/suppliers.png',
+					href : mainUrl + 'suppliers',
+					decorator : 'yellow',
+					permission : 'suppliers:index'
+				})
+
+block scripts

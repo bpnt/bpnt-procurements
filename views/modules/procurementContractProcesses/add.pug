@@ -1,0 +1,115 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../../layouts/default
+
+include ../../components/v1/form/form
+
+//- imports
+
+include ../../components/v1/common/application
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/status-message.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/forms.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/tabs.min.css')
+	link(rel='stylesheet', href=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.css')
+
+block content
+
+	- linkUrl = mainUrl+'procurement-contract-processes'
+
+	+headbar({
+		type : 'standard',
+		containerClass : 'container',
+		app : {
+			name : 'Add Procurement Contract Process',
+			src : mediaUrl+'img/modules/procurementContractProcess.png'
+		},
+		buttons : [
+		{
+			background:'bg-btn-et-black',
+			href: linkUrl,
+			title: 'Back',
+			icon: 'et et_back',
+			permission: "none"
+		}]
+	})
+
+	.container
+		.row
+			.col-md-12
+				.status-message-top
+					//- production
+					+status-message()
+
+	.container
+		.tabs
+			#tabs.et-tabs
+				ul.et-tabs-tab-group(role='tablist')
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#basic-details+')
+							i.et.et_details
+							|	Basic Details
+				.et-tabs-panel-group
+						#basic-details.et-tabs-panel(role='tabpanel')
+
+							//- Repetition Structures
+							#contract(style="display:none")
+								.form-wrapper
+									span
+										a.segment-cross()
+											i.et.et_times
+									.form-row
+										.col-half
+											h4 Documents File
+											.input-group.input-group-icon
+												input#upload-input(type='file', name='contracts', accept='application/pdf,image/*')
+												.input-icon
+													i(class="et et_briefcase")
+										.col-half
+											h4 Authorized By
+											+inputText({
+												name: 'authorizedBy',
+												placeholder: 'authorizedBy',
+												icon: 'et et_person',
+											})
+									.form-row
+										.col-half
+											h4 Authorized At
+												+inputDatePicker({
+													type: 'text',
+													name: 'authorizedAt',
+													class: 'authorizedAt'
+												})
+
+							form#basic-details-form(method="post", action="", enctype="multipart/form-data")
+								include ./forms/add
+
+block scripts
+	script(type='text/javascript', src=baseUrl+'js/status-message.min.js')
+	script(type='text/javascript', src=baseUrl+'js/form-add-entry.min.js')
+	script(type='text/javascript', src=baseUrl+'js/timespan.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/moment/moment.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/php-date-formatter/js/php-date-formatter.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.js')
+
+	script.
+		$.datetimepicker.setLocale('en');
+		$('#authorizedAt').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		function addDatePicker() {
+			var all = document.getElementsByClassName("authorizedAt");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}

@@ -1,0 +1,98 @@
+//- @file view-content
+
+	@description view: content. basic view for content.
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../layouts/default
+
+include ../components/v1/form/form
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/table.min.css')
+
+block content
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Procurement Contract Process View',
+			src : baseUrl+'img/modules/procurementContractProcess.png'
+		},
+		buttons: [
+		{
+			background:'bg-btn-et-yellow',
+			href:'#',
+			title: 'Print',
+			icon: 'fas fa-print',
+			permission: "none"
+		},
+		{
+			background: 'bg-btn-et-yellow',
+			href: linkUrl+'edit',
+			id: 'openModalSearch',
+			action:'openModalSearch',
+			title:'Edit',
+			icon: 'fas fa-edit',
+			permission: ["procurementContractProcesses:edit"]
+		},
+		{
+			background:'bg-btn-et-red',
+			id: 'openModalSearch',
+			action:'openModalSearch',
+			title: 'Delete',
+			href: linkUrl+'delete',
+			icon: 'fas fa-trash-alt',
+			permission: ["procurementContractProcesses:delete"]
+		},
+		{
+			background:'bg-btn-et-black',
+			href: linkUrl,
+			title: 'Back',
+			icon: 'fas fa-chevron-circle-left',
+			permission: "none"
+		}]
+	})
+	.container
+		br
+		h2 Title
+		.et-table
+			.table-responsive
+				table#ordering-table.advanced-web-table
+					thead
+						tr 
+							th Article Title
+							td Mr. Blue
+						tr
+							th Author
+							td v1
+						tr
+							th Blog Categories
+							td India
+						tr
+							th Blog Author
+							td India
+						tr
+							th Slug
+							td India
+						tr
+							th Published By
+							td ABC
+						tr
+							th Published On
+							td ABC
+						tr
+							th Publish On
+							td 3-3-2020
+						tr
+							th Status
+							td
+								span.et-table-status.bg-et-green    Read
+						tr
+							th Created On
+							td Thu Jan 16 2020 13:13:42 GMT+0530 (India Standard Time)
+						tr
+							th Last Modified On
+							td Thu Jan 16 2020 15:24:11 GMT+0530 (India Standard Time)

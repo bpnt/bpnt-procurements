@@ -1,0 +1,366 @@
+//- @file app
+
+	@description Apps/Modules Design
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../../layouts/default
+
+include ../../components/v1/form/form
+
+//- imports
+
+include ../../components/v1/common/application
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/status-message.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/forms.min.css')
+	link(rel='stylesheet', href=baseUrl+'css/tabs.min.css')
+	link(rel='stylesheet', href=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.css')
+
+block content
+
+	- linkUrl = mainUrl + 'procurement-processes'
+
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Edit Procurement Process',
+			src : mediaUrl + 'img/modules/procurementProcess.png'
+		},
+		buttons : [
+		{
+			background:'bg-btn-et-black',
+			href: linkUrl,
+			title: 'Back',
+			icon: 'et et_back',
+			permission: "none"
+		}]
+	})
+
+	.container
+		.row
+			.col-md-12
+				.status-message-top
+					//- production
+					+status-message()
+
+	.container
+		.tabs
+			#tabs.et-tabs
+				ul.et-tabs-tab-group(role='tablist')
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#basic-details+')
+							i.et.et_details
+							|	Basic Details
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#pis+')
+							i.et.et_categories
+							|	Procurement Items
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#suppliers+')
+							i.et.et_store
+							|	Suppliers
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#authorizations+')
+							i.et.et_shield
+							|	Authorizations
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#approvals+')
+							i.et.et_tick
+							|	Approvals
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#ssjForms+')
+							i.et.et_pdf
+							|	SSJ Form
+					li.et-tabs-tab-item(role='presentation')
+						a.et-tabs-tab(role='tab', href='#payments+')
+							i.et.et_payment
+							|	Payments
+
+				.et-tabs-panel-group
+
+					//- section for basic details -//
+
+					#basic-details.et-tabs-panel(role='tabpanel')
+						include ./forms/general_details
+
+					//- section for procurement Id (Array) -//
+
+					//- Repetative Structure
+					#pi(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									select(name='procurementItemId')
+										each product in procurementItems
+											if item.procurementItemId[0] == product.id
+												option(value=product.id selected) #{product.name}
+											else
+												option(value=product.id) #{product.name}
+
+					form#pis-form(method="post", action="")
+						#pis.et-tabs-panel(role='tabpanel')
+							include ./forms/pis
+
+					//- section for supplier Id (Array) -//
+
+					//- Repetative Structure
+					#supplier(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									select(name='supplierId')
+										each supplier in suppliers
+											if item.supplierId[0] == supplier.id
+												option(value=supplier.id selected) #{supplier.name}
+											else
+												option(value=supplier.id) #{supplier.name}
+
+					form#suppliers-form(method="post", action="")
+						#suppliers.et-tabs-panel(role='tabpanel')
+							include ./forms/suppliers
+
+					//- section for authorizations -//
+
+					//- Repetition Structures
+					#assign(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									h4 Authorized By
+									+inputText({
+										name: 'authorizedBy',
+										placeholder: 'authorized By',
+										icon: 'et et_person'
+									})
+								.col-half
+									h4 Approved At
+										+inputDatePicker({
+											type: 'text',
+											name: 'authorizedAt',
+											class: 'authorizedAt'
+										})
+							.form-row
+								.col-half
+									h4 Remarks
+									+inputText({
+										name: 'remarks',
+										placeholder: 'Remarks',
+										icon: 'et et_write'
+									})
+
+					//- form starts here
+					form#authorizations-form(method="post", action="")
+						#authorizations.et-tabs-panel(role='tabpanel')
+							//- form fields
+							include ./forms/authorizations
+
+					//- section for approvals -//
+
+					//- Repetition Structures
+					#approve(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									h3 Approved By
+									+inputText({
+										name: 'approvedBy',
+										placeholder: 'Approved By',
+										icon: 'et et_person'
+									})
+								.col-half
+									h4 Approved At
+										+inputDatePicker({
+											type: 'text',
+											name: 'approvedAt',
+											class: 'approvedAt'
+										})
+							.form-row
+								h4 Remarks
+								+inputText({
+									name: 'remarks',
+									placeholder: 'Remarks',
+									icon: 'et et_write'
+								})
+
+					//- form starts here
+					form#approvals-form(method="post", action="")
+						#approvals.et-tabs-panel(role='tabpanel')
+							//- form fields
+							include ./forms/approvals
+
+					//- section for ssjForms -//
+
+					//- Repetition Structures
+					#ssj(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									h4 Authorized By
+									+inputText({
+										name: 'authorizedBy',
+										placeholder: 'Authorized By',
+										icon: 'et et_person'
+									})
+								.col-half
+									h4 Authorized At
+										+inputDatePicker({
+											type: 'text',
+											name: 'date',
+											class: 'date'
+										})
+							.form-row
+								h4 Reason
+								+inputText({
+									name: 'reason',
+									placeholder: 'Reason',
+									icon: 'et et_info'
+								})
+
+					//- form starts here
+					form#ssjForms-form(method="post", action="")
+						#ssjForms.et-tabs-panel(role='tabpanel')
+							//- form fields
+							include ./forms/ssjForms
+
+					//- section for payments -//
+
+					//- Repetition Structures
+					#payment(style="display:none")
+						.form-wrapper
+							span
+								a.segment-cross()
+									i.et.et_times
+							.form-row
+								.col-half
+									h4 Approved By
+									+inputText({
+										name: 'approvedBy',
+										placeholder: 'Approved By',
+										icon: 'et et_person'
+									})
+								.col-half
+									h4 Payment Date
+									+inputDatePicker({
+										type: 'text',
+										name: 'paymentdate',
+										class: 'paymentdate'
+									})
+							.form-row
+								.col-half
+									h4 Assigned By
+									+inputText({
+										name: 'assignedBy',
+										placeholder: 'Assigned By',
+										icon: 'et et_person'
+									})
+
+					//- form starts here
+					form#payments-form(method="post", action="")
+						#payments.et-tabs-panel(role='tabpanel')
+							//- form fields
+							include ./forms/payments
+
+block scripts
+	script(type='text/javascript', src=baseUrl+'js/tabs.min.js')
+	script.
+		$("#tabs").tabs({
+			equalHeights: true,
+			animation: "fade-scale",
+			autoplay: false,
+			responsive: {
+				breakpoint: 800,
+				headingTagName: "h4"
+			}
+		});
+	script(type='text/javascript', src=baseUrl+'js/form-replicate-form.js')
+	script(type='text/javascript', src=baseUrl+'js/form-add-entry.min.js')
+	script(type='text/javascript', src=baseUrl+'js/form-remove-replicate-form.min.js')
+	script(type='text/javascript', src=baseUrl+'js/timespan.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/moment/moment.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/php-date-formatter/js/php-date-formatter.min.js')
+	script(type='text/javascript', src=baseUrl+'vendors/datetimepicker/jquery.datetimepicker.js')
+
+
+	script.
+		$.datetimepicker.setLocale('en');
+		$('.prePaymentdate').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		$('.preAuthorizedAt').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		$('.preApprovedAt').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		$('.preDate').datetimepicker({
+			mask:'9999/19/39 29:59'
+		});
+		function addDatePicker() {
+			var all = document.getElementsByClassName("paymentdate");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}
+
+		function addAuthorizationDatePicker() {
+			var all = document.getElementsByClassName("authorizedAt");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}
+
+		function addApprovedDatePicker() {
+			var all = document.getElementsByClassName("approvedAt");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}
+
+		function addDateDatePicker() {
+			var all = document.getElementsByClassName("date");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}
+
+		function addPaymentDatePicker() {
+			var all = document.getElementsByClassName("paymentdate");
+
+			var currItem = all[all.length - 1]
+
+			$(currItem).datetimepicker({
+				mask:'9999/19/39 29:59'
+			});
+		}

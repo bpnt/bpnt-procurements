@@ -1,0 +1,96 @@
+input(type='hidden', name='_csrf',  value=csrfToken)
+input(type="hidden", name="_page", value="ssjForms")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-blue
+					a(title='Add Authorizer', onclick="addEntry({structure: '#ssj', structures: '#ssjForms'});addDateDatePicker();")
+						i.et.et_add
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("ssjForms-form").submit();')
+					i.et.et_save
+
+.divider
+
+if item.ssjForms
+	if item.ssjForms.length > 0
+		each ssj in item.ssjForms
+			.form-wrapper
+				span
+					a.segment-cross()
+						i.et.et_times
+				.form-row
+					.col-half
+						h4 Authorized By
+						+inputText({
+							name: 'authorizedBy',
+							placeholder: 'Authorized By',
+							icon: 'et et_person',
+							value: ssj.authorizedBy
+						})
+					.col-half
+						h4 Date
+						+inputDatePicker({
+							type: 'text',
+							name: 'date',
+							class: 'preDate',
+							value: formatDate(ssj.date)
+						})
+				.form-row
+					h4 Reason
+					+inputText({
+						name: 'reason',
+						placeholder: 'Reason',
+						icon: 'et et_info',
+						value: ssj.reason
+					})
+
+	else
+		.form-row
+			.col-half
+				h4 Authorized By
+				+inputText({
+					name: 'authorizedBy',
+					placeholder: 'Authorized By',
+					icon: 'et et_person'
+				})
+			.col-half
+				h4 Date
+				+inputDatePicker({
+					type: 'text',
+					name: 'date',
+					class: 'preDate'
+				})
+		.form-row
+			h4 Reason
+			+inputText({
+				name: 'reason',
+				placeholder: 'Reason',
+				icon: 'et et_info'
+			})
+
+else
+	.form-row
+		.col-half
+			h4 Authorized By
+			+inputText({
+				name: 'authorizedBy',
+				placeholder: 'Authorized By',
+				icon: 'et et_person'
+			})
+		.col-half
+			h4 Date
+			+inputDatePicker({
+				type: 'text',
+				name: 'date',
+				class: 'preDate'
+			})
+	.form-row
+		h4 Reason
+		+inputText({
+			name: 'reason',
+			placeholder: 'Reason',
+			icon: 'et et_info'
+		})
+
+

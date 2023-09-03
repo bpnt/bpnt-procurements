@@ -1,0 +1,37 @@
+form#advance-details-edit(method="post", action="")
+	input(name='_csrf', type='hidden', value=csrfToken)
+	input(type="hidden", name="_page", value = 'advance-details')
+	.form-row.form-headbar
+		.col-half.status-message
+		.col-half
+			.form-buttons
+				ul
+					li.bg-btn-et-green
+						a(title='Save', onclick='document.getElementById("advance-details-edit").submit();')
+							i.et.et_save
+	.form-row
+		.col-half
+			h4 State
+			+inputText({
+				name: 'state',
+				placeholder: 'State',
+				icon: 'et et_map',
+				value: item.state
+			})
+		.col-half
+			h4 Pin Code
+			+inputText({
+				name: 'pincode',
+				placeholder: 'Pin Code',
+				icon: 'et et_number',
+				value: item.pincode
+			})
+	.form-row
+		.col-half
+			h4 Approved By
+			+inputText({
+				name: 'approvedBy',
+				placeholder: 'Approved By',
+				icon: 'et et_person',
+				value: item.approvedBy
+			})

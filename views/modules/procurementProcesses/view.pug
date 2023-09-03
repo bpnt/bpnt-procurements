@@ -1,0 +1,156 @@
+//- @file view-content
+
+	@description view: content. basic view for content.
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+extends ../../layouts/default
+
+include ../../components/v1/form/form
+
+block styles
+	link(rel='stylesheet', href=baseUrl+'css/table.min.css')
+
+block content
+
+	- linkUrl = mainUrl + 'procurement-processes'
+
+	+headbar({
+		type : 'basic',
+		containerClass : 'container',
+		app : {
+			name : 'Procurement Process',
+			src : mediaUrl+'img/modules/procurementProcess.png'
+		},
+		buttons: [
+		{
+			background:'bg-btn-et-yellow',
+			href:'#',
+			title: 'Print',
+			icon: 'et et_print',
+			permission: "none"
+		},
+		{
+			background: 'bg-btn-et-yellow',
+			href: linkUrl + '/edit/' + item.reference,
+			id: 'openModalSearch',
+			action:'openModalSearch',
+			title:'Edit',
+			icon: 'et et_edit',
+			permission: "procurementProcesses:edit"
+		},
+		{
+			background:'bg-btn-et-red',
+			id: 'openModalSearch',
+			action:'openModalSearch',
+			title: 'Delete',
+			href: linkUrl + '/delete/' + item.reference,
+			icon: 'et et_delete',
+			permission: "procurementProcesses:delete"
+		},
+		{
+			background:'bg-btn-et-black',
+			href: linkUrl,
+			title: 'Back',
+			icon: 'et et_back',
+			permission: "none"
+		}]
+	})
+	.container
+		br
+		h2 #{item.title}
+		.et-table
+			.table-responsive
+				table#ordering-table.advanced-web-table
+					thead
+						tr
+							th Approved By
+							td= item.approvals[0].approvedBy
+						tr
+							th Approved At
+							td= item.approvals[0].approvedAt
+						tr
+							th Payment Date
+							td= item.payments[0].paymentdate
+						tr
+							th Payment Approved By
+							td= item.payments[0].approvedBy
+						tr
+							th Payment Assigned By
+							td= item.payments[0].assignedBy
+						tr
+							th Authorized By
+							td= item.authorizations[0].authorizedBy
+						tr
+							th Authorized At
+							td= item.authorizations[0].authorizedAt
+						tr
+							th Publish (Status)
+							td
+								if item.publish
+										span.et-table-status.bg-et-green Published
+								else
+									span.et-table-status.bg-et-yellow Unpublished
+						tr
+							th PublishApi (Status)
+							td
+								if item.publishApi
+										span.et-table-status.bg-et-green Published
+								else
+									span.et-table-status.bg-et-yellow Unpublished
+						tr
+							th Created On
+							td= item.createdAt
+						tr
+							th Last Modified On
+							td= item.updatedAt
+
+	if item.contents && item.contents.length > 0
+		- var length = item.contents.length
+		- var plus = length + 1
+		- var ver = version - 1
+		.container
+			.content-segement
+				.content-form
+					form
+						.form-row
+							.col-half
+								h4 Select Version
+									select(name='version' id='version')
+										- var n = 1
+										while n < (plus)
+											if(version == n)
+												option(value=n selected) V#{n++}
+											else
+												option(value=n) V#{n++}
+				.content-header
+					if item.contents[ver].by
+						h4 By: #{item.contents[ver].by}
+					else
+						h4 Undefined
+					if item.contents[ver].finalizedAt
+						h4 Finalized On : #{item.contents[ver].finalizedAt}
+					else
+						h4 Not Finalized
+
+				hr
+				br
+				h3 Content
+				br
+				.content-content
+					p !{item.contents[ver].text}
+				br
+				hr
+				.content-note
+					h4 Notes:
+					p !{item.contents[ver].note}
+
+block scripts
+	script.
+		$(document).ready(function(){
+			$('#version').change(function(){
+				window.location.href = window.location.href.split('?')[0]  + '?version=' + $(this).val();
+			});
+		});

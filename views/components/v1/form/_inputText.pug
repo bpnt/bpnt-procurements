@@ -1,0 +1,34 @@
+//- @file inputText
+
+	@description text input
+
+	@author Jeevan Prakash Pant <jp@edtyro.com>
+	@version 1.0.0
+	@copyright Edtyro Private Limited, 2020
+
+
+//- @mixin inputPassword
+
+	@param {Object} p test input paramaters
+	@param {String} p.icon icon for test
+	@param {String} p.class class for test input
+	@param {String} p.name name for test input  
+	@param {String} p.id id for test input
+	@param {String} p.value value for test input
+
+mixin inputText(p)
+
+	if p.icon
+		.input-group.input-group-icon
+			if p.value
+				input(type='text', name=p.name, id=p.id, class=p.class, value=p.value, placeholder=p.placeholder)
+			else
+				input(type='text', name=p.name, id=p.id, class=p.class, placeholder=p.placeholder)
+			.input-icon
+				i(class=p.icon)
+	else
+		.input-group
+			if p.value
+				input(type='text', name=p.name, id=p.id, class=p.class, value=p.value, placeholder=p.placeholder)
+			else
+				input(type='text', name=p.name, id=p.id, class=p.class, placeholder=p.placeholder)

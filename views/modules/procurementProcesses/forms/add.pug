@@ -1,0 +1,28 @@
+form#basic-details-form(method="post", action="")
+	input(name='_csrf', type='hidden', value=csrfToken)
+	.form-row.form-headbar
+		.form-buttons
+			ul
+				li.bg-btn-et-green
+					a(title='Save', onclick='document.getElementById("basic-details-form").submit();')
+						i.et.et_save
+	.form-row
+		h4 Conditionals
+		.col-half
+			.input-group
+				input#terms(type='checkbox' name='publish')
+				label(for='terms')
+					| Publish
+		.col-half
+			.input-group
+				input#publishApi(type='checkbox' name='publishApi')
+				label(for='publishApi')
+					| Publish API
+	.divider
+	.form-row
+		h4 Process Name
+		+inputText({
+			name: 'name',
+			placeholder: 'Name',
+			icon: 'et et_id'
+		})

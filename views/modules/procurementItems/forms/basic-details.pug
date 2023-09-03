@@ -1,0 +1,76 @@
+input(type='hidden', name='_csrf', value=csrfToken)
+input(type="hidden", name="_page", value="basic-details")
+.form-row.form-headbar
+	.form-buttons
+		ul
+			li.bg-btn-et-green
+				a(title='Save', onclick='document.getElementById("basic-details-form").submit();')
+					i.et.et_save
+.form-row
+	h4 Conditionals
+	.col-half
+		.input-group
+			if item.publish
+				input#terms(type='checkbox' name='publish', checked)
+			else
+				input#terms(type='checkbox' name='publish')
+			label(for='terms')
+				| Publish
+	.col-half
+		.input-group
+			if item.publishApi
+				input#publishApi(type='checkbox' name='publishApi', checked)
+			else
+				input#publishApi(type='checkbox' name='publishApi')
+			label(for='publishApi')
+				| Publish API
+.divider
+.form-row
+	h4 Name Of Person
+	+inputText({
+		name: 'name',
+		placeholder: 'Name',
+		icon: 'et et_id',
+		value: item.name
+	})
+.form-row
+	h4 Item Name
+	+inputText({
+		name: 'item',
+		placeholder: 'Item',
+		icon: 'et et_categories',
+		value: item.item
+	})
+.form-row
+	.col-half
+		h4 Cost
+		+inputText({
+			name: 'cost',
+			placeholder: 'Cost',
+			icon: 'et et_money',
+			value: item.cost
+		})
+	.col-half
+		h4 Quantity
+		+inputText({
+			name: 'quantity',
+			placeholder: 'Quantity',
+			icon: 'et et_number',
+			value: item.quantity
+		})
+.divider
+.form-row
+	if(item.image)
+		.col-half
+			h4 Current Image
+			img(src='/uploads/procurementItems/' + item.reference + '/' + item.image style="max-width:100%")
+	.col-half
+		h4 Add / Change Image (Optional)
+		.input-group.input-group-icon
+			input#upload-input(type='file', name='image', accept='image/*')
+			.input-icon
+				i(class="et et_briefcase")
+.divider
+.form-row
+	h4 Item Description
+		textarea#description(name="description" style="min-height: 350px") !{item.description || 'Place Your Content Here'}

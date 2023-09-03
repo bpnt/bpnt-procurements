@@ -1,0 +1,65 @@
+//- @file Headbar Mixin
+	@description Headbar Mixin
+	@author Jeevan Prakash Pant <jp@edtyro.com> INITIAL WORK
+	@version 1.0.0
+	@copyright Edtyro Private Limited
+	@since 2020/04/05
+
+
+//- imports
+
+include ./_headbarHeading
+include ./_functionButtons
+
+
+//-	@mixin headbar
+
+	@param {Object} headbar
+	@param {String} headbar.containerClass Container class (e.g. 'container')
+	@param {String} headbar.type Type of Headbar (e.g. 'basic')
+	@param {Object} headbar.app
+	@param {String} headbar.app.name Name of Application (e.g. 'News')
+	@param {String} headbar.app.src Source of Application Icon (e.g. '/img/fav.png')
+	@param [{Object}] headbar.buttons
+	@param {String} headbar.button.background Background color of button (e.g. 'bg-btn-et-yellow')
+	@param {String} headbar.button.href Href link (e.g. '/application')
+	@param {String} headbar.button.title Button title (e.g. 'Categories')
+	@param {String} headbar.button.icon Button icon (e.g. 'fas fa-list-alt')
+	@param {String} headbar.button.permission Permission required for button (e.g. 'none')
+
+mixin headbar(headbar)
+
+	.headbar
+		div(class=headbar.containerClass)
+			.row
+				if headbar.type == 'basic'
+					if headbar.buttons
+						.col-md-6
+							+headbarHeading(headbar.app)
+						.col-md-6
+							+functionButtons(headbar.buttons)
+					else
+						.col-md-12
+							+headbarHeading(headbar.app)
+
+				else if headbar.type == 'standard'
+
+					if headbar.buttons
+						.col-md-8
+							+headbarHeading(headbar.app)
+						.col-md-4
+							+functionButtons(headbar.buttons)
+					else
+						.col-md-12
+							+headbarHeading(headbar.app)
+				else
+
+					if headbar.buttons
+						.col-md-4
+							+headbarHeading(headbar.app)
+						.col-md-8
+							+functionButtons(headbar.buttons)
+					else
+						.col-md-12
+							+headbarHeading(headbar.app)
+//- Head Bar terminates
