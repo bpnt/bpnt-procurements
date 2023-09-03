@@ -1,0 +1,46 @@
+{
+    "app": {
+        "index": "Procurements Index",
+        "settings": "Procurements Settings"
+    },
+    "procurementContractProcesses": {
+        "index": "Procurement Contract Processes Index",
+        "view": "View Procurement Contract Process",
+        "add": "Add Procurement Contract Process",
+        "edit": "Edit Procurement Contract Process",
+        "delete": "Delete Procurement Contract Process",
+        "restore": "Restore Procurement Contract Process",
+        "purge": "Purge Procurement Contract Process",
+        "settings": "Procurement Contract Process Settings"
+    },
+    "procurementItems": {
+        "index": "Procurement Items Index",
+        "view": "View Procurement Items",
+        "add": "Add Procurement Items",
+        "edit": "Edit Procurement Items",
+        "delete": "Delete Procurement Items",
+        "restore": "Restore Procurement Items",
+        "purge": "Purge Procurement Items",
+        "settings": "Procurement Items Settings"
+    },
+    "procurementProcesses": {
+        "index": "Procurement Processes Index",
+        "view": "View Procurement Process",
+        "add": "Add Procurement Process",
+        "edit": "Edit Procurement Process",
+        "delete": "Delete Procurement Process",
+        "restore": "Restore Procurement Process",
+        "purge": "Purge Procurement Process",
+        "settings": "Procurement Process Settings"
+    },
+    "suppliers": {
+        "index": "Suppliers Index",
+        "view": "View Supplier",
+        "add": "Add Supplier",
+        "edit": "Edit Supplier",
+        "delete": "Delete Supplier",
+        "restore": "Restore Supplier",
+        "purge": "Purge Supplier",
+        "settings": "Supplier Settings"
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "procurements": {
+        "name": "Procurement",
+        "sub": {
+            "procurement-contract-processes": {
+                "name": "Procurement Contract Processes",
+                "sub": {
+                    "add": {
+                        "name": "Add Procurement Contract Process"
+                    },
+                    "edit": {
+                        "name": "Edit Procurement Contract Process"
+                    },
+                    "view": {
+                        "name": "View Procurement Contract Process"
+                    }
+                }
+            },
+            "procurement-items": {
+                "name": "Procurement Items",
+                "sub": {
+                    "add": {
+                        "name": "Add Procurement Item"
+                    },
+                    "edit": {
+                        "name": "Edit Procurement Item"
+                    },
+                    "view": {
+                        "name": "View Procurement Item"
+                    }
+                }
+            },
+            "procurement-processes": {
+                "name": "Procurement Processes",
+                "sub": {
+                    "add": {
+                        "name": "Add Procurement Process"
+                    },
+                    "edit": {
+                        "name": "Edit Procurement Process"
+                    },
+                    "view": {
+                        "name": "View Procurement Process"
+                    }
+                }
+            },
+            "suppliers": {
+                "name": "Suppliers",
+                "sub": {
+                    "add": {
+                        "name": "Add Supplier"
+                    },
+                    "edit": {
+                        "name": "Edit Supplier"
+                    },
+                    "view": {
+                        "name": "View Supplier"
+                    }
+                }
+            }
+        }
+    }
+}
